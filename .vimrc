@@ -54,8 +54,3 @@ nmap <silent> <C-j> :wincmd j<CR>
 nmap <silent> <C-h> :wincmd h<CR>
 nmap <silent> <C-l> :wincmd l<CR>
 " }}}
-
-" Plugins {{{
-execute pathogen#infect()
-source ~/.vim/bundle/cscope/cscope_maps.vim
-" }}}
