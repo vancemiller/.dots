@@ -54,3 +54,29 @@ nmap <silent> <C-j> :wincmd j<CR>
 nmap <silent> <C-h> :wincmd h<CR>
 nmap <silent> <C-l> :wincmd l<CR>
 " }}}
+
+" Plugins {{{
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/vim-github-dashboard'
+Plug 'Raimondi/yaifa'
+Plug 'tpope/vim-fugitive'
+Plug 'rhysd/vim-clang-format'
+call plug#end()
+" Type :PlugInstall to use the plugin manager
+" }}}
+
+" Clang-Format {{{
+let g:clang_format#detect_style_file = 1
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc,bfaspec,cuda nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc,bfaspec,cuda vnoremap <buffer><Leader>cf :ClangFormat<CR>
+" Toggle auto formatting:
+nmap <Leader>C :ClangFormatAutoToggle<CR>
+" Format when exiting insert mode
+autocmd FileType c,cpp,objc,bfaspec,cuda let g:clang_format#auto_format_on_insert_leave = 0
+" }}}
